@@ -25,7 +25,7 @@ jobs:
     - name: Build and Run on Simulator
       run: |
         xcodebuild \
-          -workspace YourWorkspaceName.xcworkspace \
-          -scheme YourSchemeName \
+          -workspace obusdk-ios-sample.xcworkspace \
+          -scheme obusdk-ios-sample \
           -destination 'platform=iOS Simulator,name=iPhone 13' \
           clean build test
