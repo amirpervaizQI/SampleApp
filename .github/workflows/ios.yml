@@ -23,5 +23,7 @@ jobs:
         xcodebuild \
           -workspace obusdk-ios-sample.xcworkspace \
           -scheme obusdk-ios-sample \
-          -destination 'platform=iOS Simulator' \
+          -destination 'platform=iOS Simulator, name:Any iOS Simulator Device' \
           clean build test
+
+         # { platform:iOS Simulator, id:dvtdevice-DVTiOSDeviceSimulatorPlaceholder-iphonesimulator:placeholder, name:Any iOS Simulator Device }
