@@ -20,4 +20,4 @@ jobs:
           pod install
           
       - name: Build and Compile
-        run: xcodebuild -workspace obusdk-ios-sample.xcworkspace -scheme obusdk-ios-sample build
+        run: xcodebuild -workspace obusdk-ios-sample.xcworkspace -scheme obusdk-ios-sample -allowProvisioningUpdates build
