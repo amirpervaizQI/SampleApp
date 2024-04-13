@@ -29,6 +29,6 @@ jobs:
         #   -scheme obusdk-ios-sample \
         #   -destination 'platform=iOS Simulator, name:Any iOS Simulator Device' \
         #   clean build test
-          xcodebuild test -scheme obusdk-ios-sample -destination "name=iPhone 15 Pro" | xcpretty && exit ${PIPESTATUS[0]}
+          xcodebuild test -scheme obusdk-ios-sample -destination 'platform:iOS Simulator, id:EDC4FDF6-1628-410E-87D0-61A5A74F0696, OS:17.0, name:iPhone 14' | xcpretty && exit ${PIPESTATUS[0]}
 
          # { platform:iOS Simulator, id:dvtdevice-DVTiOSDeviceSimulatorPlaceholder-iphonesimulator:placeholder, name:Any iOS Simulator Device }
