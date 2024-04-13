@@ -1,0 +1,28 @@
+name: iOS Build and Compile Check
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and Compile Check
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Xcode
+        uses: actions/setup-xcode@v2
+        with:
+          xcode-version: '13.x' # Set the desired Xcode version
+
+      - name: Install CocoaPods
+        run: |
+          gem install cocoapods
+          pod install
+          
+      - name: Build and Compile
+        run: xcodebuild -workspace obusdk-ios-sample.xcworkspace -scheme obusdk-ios-sample build
