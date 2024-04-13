@@ -20,10 +20,11 @@ jobs:
     
     - name: Build and Run on Simulator
       run: |
-        xcodebuild \
-          -workspace obusdk-ios-sample.xcworkspace \
-          -scheme obusdk-ios-sample \
-          -destination 'platform=iOS Simulator, name:Any iOS Simulator Device' \
-          clean build test
+        # xcodebuild \
+        #   -workspace obusdk-ios-sample.xcworkspace \
+        #   -scheme obusdk-ios-sample \
+        #   -destination 'platform=iOS Simulator, name:Any iOS Simulator Device' \
+        #   clean build test
+          xcodebuild test -scheme obusdk-ios-sample -destination "name=iPhone 15 Pro" | xcpretty && exit ${PIPESTATUS[0]}
 
          # { platform:iOS Simulator, id:dvtdevice-DVTiOSDeviceSimulatorPlaceholder-iphonesimulator:placeholder, name:Any iOS Simulator Device }
