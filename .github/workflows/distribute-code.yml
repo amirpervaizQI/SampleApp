@@ -26,6 +26,17 @@ jobs:
         run: |
           zip -r project.zip .
 
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref }}  # Tag that triggered the workflow
+          release_name: Release ${{ github.ref }}  # Name of the release
+          draft: false
+          prerelease: false
+          body: |
+            Release notes for version ${{ github.ref }}
+
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         with:
