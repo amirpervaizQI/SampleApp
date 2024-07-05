@@ -1,0 +1,40 @@
+name: Create and Upload Release Zip
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Remove .gitignore and Gemfile
+        run: |
+          rm -f .gitignore Gemfile
+
+      - name: Remove file references from Xcode project
+        run: |
+          sed -i '' '/.gitignore/d' obusdk-ios-sample.xcodeproj/project.pbxproj
+          sed -i '' '/Gemfile/d' obusdk-ios-sample..xcodeproj/project.pbxproj
+
+      - name: Remove unit test folder and reference
+        run: |
+          rm -rf obusdk-ios-sampleTests
+          sed -i '' '/obusdk-ios-sampleTests/d' obusdk-ios-sample.xcodeproj/project.pbxproj
+
+      - name: Create a zip of the project
+        run: |
+          zip -r project.zip .
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./project.zip
+          asset_name: project.zip
+          asset_content_type: application/zip
