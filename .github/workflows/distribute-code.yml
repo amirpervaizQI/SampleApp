@@ -29,7 +29,7 @@ jobs:
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         with:
-          upload_url: ${{ github.event.release.upload_url }}
+          upload_url: ${{ steps.create_release.outputs.upload_url }}  # URL to upload the asset
           asset_path: ./project.zip
           asset_name: project.zip
           asset_content_type: application/zip
