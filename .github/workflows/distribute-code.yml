@@ -36,6 +36,8 @@ jobs:
           prerelease: false
           body: |
             Release notes for version ${{ github.ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Token for authentication
 
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
