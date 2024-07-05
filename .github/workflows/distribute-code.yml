@@ -17,11 +17,6 @@ jobs:
         run: |
           rm -f .gitignore Gemfile
 
-      - name: Remove file references from Xcode project
-        run: |
-          sed -i '' '/.gitignore/d' obusdk-ios-sample.xcodeproj/project.pbxproj
-          sed -i '' '/Gemfile/d' obusdk-ios-sample..xcodeproj/project.pbxproj
-
       - name: Remove unit test folder and reference
         run: |
           rm -rf obusdk-ios-sampleTests
