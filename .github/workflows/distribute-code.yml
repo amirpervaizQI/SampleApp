@@ -22,6 +22,12 @@ jobs:
           rm -rf obusdk-ios-sampleTests
           sed -i '' '/obusdk-ios-sampleTests/d' obusdk-ios-sample.xcodeproj/project.pbxproj
 
+      - uses: jungwinter/split@v2
+        id: split
+        with:
+          separator: '/'
+          msg: ${{ github.ref_name }}
+          
       - name: Create a zip of the project
         run: |
           zip -r project.zip .
