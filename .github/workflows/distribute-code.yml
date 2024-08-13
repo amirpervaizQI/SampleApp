@@ -22,12 +22,10 @@ jobs:
           rm -rf obusdk-ios-sampleTests
           sed -i '' '/obusdk-ios-sampleTests/d' obusdk-ios-sample.xcodeproj/project.pbxproj
 
-      - uses: jungwinter/split@v2
-        id: split
-        with:
-          separator: '/'
-          msg: ${{ github.ref_name }}
-          
+      - name: Extract version from tag
+        id: extract_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/dist/v}" >> $GITHUB_ENV
+        
       - name: Create a zip of the project
         run: |
           zip -r project.zip .
@@ -37,7 +35,7 @@ jobs:
         uses: actions/create-release@v1
         with:
           tag_name: ${{ github.ref }}  # Tag that triggered the workflow
-          release_name: "obusdk-ios-dist${{ steps.split.outputs.major }}"
+          release_name: "obusdk-ios-dist${{ env.VERSION }}"
           draft: false
           prerelease: false
           body: |
