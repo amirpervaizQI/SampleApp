@@ -43,10 +43,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Token for authentication
 
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
+      # This asset upload uses https://github.com/actions/upload-release-asset
+      - name: Upload source code in Release Assets
+        id: upload-release-asset
+        uses: alexellis/upload-assets@0.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}  # URL to upload the asset
-          asset_path: ./project.zip
-          asset_name: project.zip
-          asset_content_type: application/zip
+          asset_paths: '["./obusdk-ios-${{ env.VERSION }}.zip"]'
+          
+      # - name: Upload Release Asset
+      #   uses: actions/upload-release-asset@v1
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}  # URL to upload the asset
+      #     asset_path: ./project.zip
+      #     asset_name: project.zip
+      #     asset_content_type: application/zip
