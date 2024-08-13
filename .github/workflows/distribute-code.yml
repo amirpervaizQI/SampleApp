@@ -31,7 +31,7 @@ jobs:
         uses: actions/create-release@v1
         with:
           tag_name: ${{ github.ref }}  # Tag that triggered the workflow
-          release_name: obusdk-ios-dist-${{ steps.split.outputs._1 }}
+          release_name: "obusdk-ios-dist${{ steps.split.outputs.major }}"
           draft: false
           prerelease: false
           body: |
