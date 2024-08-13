@@ -26,7 +26,7 @@ jobs:
       - name: Remove fastlane and references to fastlane in Xcode project
         run: |
           rm -rf fastlane
-          sed -i '' '/fastlane/d' obusdk-ios-sample.xcodeproj/project.pbxproj
+          sed -i '' '/fastlane/d' obusdk-ios-sample.xcodeproj/project.pbxproj || true
 
       - name: Remove unit test folder and reference
         run: |
