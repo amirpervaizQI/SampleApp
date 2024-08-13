@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A0E0DD02C6B6AB100E4F3A4 /* release-notes in Resources */ = {isa = PBXBuildFile; fileRef = 0A0E0DCF2C6B6AB100E4F3A4 /* release-notes */; };
+		0A0E0DD12C6B6AB100E4F3A4 /* build-universal-xcframework-debug.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0A0E0DC82C6B6AB100E4F3A4 /* build-universal-xcframework-debug.sh */; };
+		0A0E0DD22C6B6AB100E4F3A4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0A0E0DCC2C6B6AB100E4F3A4 /* README.md */; };
+		0A0E0DD32C6B6AB100E4F3A4 /* Pluginfile in Resources */ = {isa = PBXBuildFile; fileRef = 0A0E0DCB2C6B6AB100E4F3A4 /* Pluginfile */; };
+		0A0E0DD42C6B6AB100E4F3A4 /* report.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0A0E0DCD2C6B6AB100E4F3A4 /* report.xml */; };
+		0A0E0DD52C6B6AB100E4F3A4 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = 0A0E0DCA2C6B6AB100E4F3A4 /* Fastfile */; };
+		0A0E0DD62C6B6AB100E4F3A4 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = 0A0E0DC92C6B6AB100E4F3A4 /* Appfile */; };
 		0A48BE162B9EC02D00358C73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A48BE152B9EC02D00358C73 /* AppDelegate.swift */; };
 		0A48BE182B9EC02D00358C73 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A48BE172B9EC02D00358C73 /* SceneDelegate.swift */; };
 		0A48BE1A2B9EC02D00358C73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A48BE192B9EC02D00358C73 /* ViewController.swift */; };
@@ -37,6 +44,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A0E0DC82C6B6AB100E4F3A4 /* build-universal-xcframework-debug.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "build-universal-xcframework-debug.sh"; sourceTree = "<group>"; };
+		0A0E0DC92C6B6AB100E4F3A4 /* Appfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
+		0A0E0DCA2C6B6AB100E4F3A4 /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
+		0A0E0DCB2C6B6AB100E4F3A4 /* Pluginfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Pluginfile; sourceTree = "<group>"; };
+		0A0E0DCC2C6B6AB100E4F3A4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0A0E0DCD2C6B6AB100E4F3A4 /* report.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = report.xml; sourceTree = "<group>"; };
+		0A0E0DCF2C6B6AB100E4F3A4 /* release-notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = "release-notes"; sourceTree = "<group>"; };
 		0A48BE122B9EC02D00358C73 /* obusdk-ios-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "obusdk-ios-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A48BE152B9EC02D00358C73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A48BE172B9EC02D00358C73 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,9 +92,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A0E0DCE2C6B6AB100E4F3A4 /* fastlane */ = {
+			isa = PBXGroup;
+			children = (
+				0A0E0DC92C6B6AB100E4F3A4 /* Appfile */,
+				0A0E0DCA2C6B6AB100E4F3A4 /* Fastfile */,
+				0A0E0DCB2C6B6AB100E4F3A4 /* Pluginfile */,
+				0A0E0DCC2C6B6AB100E4F3A4 /* README.md */,
+				0A0E0DCD2C6B6AB100E4F3A4 /* report.xml */,
+			);
+			path = fastlane;
+			sourceTree = "<group>";
+		};
 		0A48BE092B9EC02D00358C73 = {
 			isa = PBXGroup;
 			children = (
+				0A0E0DC82C6B6AB100E4F3A4 /* build-universal-xcframework-debug.sh */,
+				0A0E0DCE2C6B6AB100E4F3A4 /* fastlane */,
+				0A0E0DCF2C6B6AB100E4F3A4 /* release-notes */,
 				0A48BE142B9EC02D00358C73 /* obusdk-ios-sample */,
 				0A48BE2B2B9EC02E00358C73 /* obusdk-ios-sampleTests */,
 				0A48BE352B9EC02E00358C73 /* obusdk-ios-sampleUITests */,
@@ -245,6 +274,13 @@
 				0A48BE222B9EC02E00358C73 /* LaunchScreen.storyboard in Resources */,
 				0A48BE1F2B9EC02E00358C73 /* Assets.xcassets in Resources */,
 				0A48BE1D2B9EC02D00358C73 /* Main.storyboard in Resources */,
+				0A0E0DD02C6B6AB100E4F3A4 /* release-notes in Resources */,
+				0A0E0DD12C6B6AB100E4F3A4 /* build-universal-xcframework-debug.sh in Resources */,
+				0A0E0DD22C6B6AB100E4F3A4 /* README.md in Resources */,
+				0A0E0DD32C6B6AB100E4F3A4 /* Pluginfile in Resources */,
+				0A0E0DD42C6B6AB100E4F3A4 /* report.xml in Resources */,
+				0A0E0DD52C6B6AB100E4F3A4 /* Fastfile in Resources */,
+				0A0E0DD62C6B6AB100E4F3A4 /* Appfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
