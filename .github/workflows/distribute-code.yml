@@ -17,11 +17,11 @@ jobs:
         run: rm -f release-notes
 
       - name: Delete build-universal-xcframework-debug file
-        run: rm -f build-universal-xcframework-debug
+        run: rm -f build-universal-xcframework-debug.sh
 
       - name: Remove .gitignore, gitmodules, and Gemfile
         run: |
-          rm -f .gitignore .gitmodules Gemfile
+          rm -f .gitignore .gitmodules Gemfile Gemfile.lock
 
       - name: Remove fastlane and references to fastlane in Xcode project
         run: |
