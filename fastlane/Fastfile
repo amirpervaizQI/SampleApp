@@ -1,0 +1,239 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+# variables
+nexgen_erp_dev_id =         "1:233040486883:ios:78395a5814ec34f0cc80d6"
+nexgen_erp_prod_id =        "1:233040486883:ios:7920554c023e20f7cc80d6"
+nexgen_erp_uat_id =         "1:233040486883:ios:acbc657f760380e6cc80d6"
+nexgen_erp_mock_dev_id =    "1:233040486883:ios:66a1fa68565e401dcc80d6"
+nexgen_erp_mock_prod_id =   "1:233040486883:ios:35c912318f1e3aebcc80d6"
+nexgen_erp_mock_uat_id =    "1:233040486883:ios:48f0c960227f8973cc80d6"
+
+
+desc "Dev build distribution on Firebase to QA team"
+lane :release_dev do
+    release_dev_firebase()
+end
+
+desc "Prod build distribution on Firebase to QA team"
+lane :release_prod do
+    release_prod_firebase()
+end
+
+desc "UAT build distribution on Firebase to QA team"
+lane :release_uat do
+    release_uat_firebase()
+end
+
+
+desc "UAT build distribution on Firebase to QA team"
+lane :release_all do
+    release_dev_firebase()
+    release_prod_firebase()
+    release_uat_firebase()
+end
+
+
+desc "install pods"
+lane :install_pods do
+cocoapods(
+  clean_install: true,
+  podfile: "Podfile"
+)
+end
+
+desc "Release dev builds on Firebase to QA team"
+lane :release_dev_firebase do
+# For each variant, there are three builds: 1) BLE without logs 2) BLE with logs 3) Mock without logs
+# BLE release build
+    build_obu_display_app(scheme: "OBUDisplayApp-Dev", export_options: {
+        method: 'ad-hoc',
+        configuration: "ReleaseDev",
+        provisioningProfiles: {
+            "sg.gov.lta.extol.dev" => "extol dev",
+            "sg.gov.lta.extol.dev.notification" => "extol dev notification"
+        }
+    })
+    distribute_to_firebase(app: nexgen_erp_dev_id)
+
+
+
+# increment build number for logs
+increment_build_number(
+    xcodeproj: "OBUDisplayApp/OBUDisplayApp.xcodeproj",
+)
+
+    # BLE debug build with logs
+    build_obu_display_app(scheme: "OBUDisplayApp-Dev", export_options: {
+        method: 'ad-hoc',
+        configuration: "DebugDev",
+        provisioningProfiles: {
+            "sg.gov.lta.extol.dev" => "extol dev",
+            "sg.gov.lta.extol.dev.notification" => "extol dev notification"
+        }
+    })
+    distribute_to_firebase(app: nexgen_erp_dev_id, release_notes: true)
+    
+        # Mock release build
+    build_obu_display_app(scheme: "OBUDisplayAppMock-Dev", export_options: {
+        method: 'ad-hoc',
+        configuration: "ReleaseMockDev",
+        provisioningProfiles: {
+            "sg.gov.lta.extol.mock.dev" => "extol mock dev",
+            "sg.gov.lta.extol.mock.dev.notification" => "extol mock dev notification"
+        }
+    })
+    distribute_to_firebase(app: nexgen_erp_mock_dev_id)
+    
+end
+
+desc "Release PROD builds on Firebase to QA team"
+lane :release_prod_firebase do
+# For each variant, there are three builds: 1) BLE without logs 2) BLE with logs 3) Mock without logs
+# BLE release build
+    build_obu_display_app(scheme: "OBUDisplayApp-Prod", export_options: {
+        method: 'ad-hoc',
+        configuration: "ReleaseProd",
+        provisioningProfiles: {
+            "sg.gov.lta.extol.prod" => "extol prod",
+            "sg.gov.lta.extol.prod.notification" => "extol prod notification"
+
+        }
+    })
+    distribute_to_firebase(app: nexgen_erp_prod_id)
+
+
+# increment build number for logs
+increment_build_number(
+    xcodeproj: "OBUDisplayApp/OBUDisplayApp.xcodeproj",
+)
+    
+    # BLE debug build with logs
+    build_obu_display_app(scheme: "OBUDisplay-Prod", export_options: {
+        method: 'ad-hoc',
+        configuration: "DebugProd",
+        provisioningProfiles: {
+            "sg.gov.lta.extol.prod" => "extol prod",
+            "sg.gov.lta.extol.prod.notification" => "extol prod notification"
+
+        }
+    })
+    distribute_to_firebase(app: nexgen_erp_prod_id, release_notes: true)
+    
+        # Mock release build
+    build_obu_display_app(scheme: "OBUDisplayMock-Prod", export_options: {
+        method: 'ad-hoc',
+        configuration: "ReleaseMockProd",
+        provisioningProfiles: {
+            "sg.gov.lta.extol.mock.prod" => "extol mock prod",
+            "sg.gov.lta.extol.mock.prod.notification" => "extol mock prod notification"
+
+        }
+    })
+    distribute_to_firebase(app: nexgen_erp_mock_prod_id)
+    
+end
+
+desc "Release UAT builds on Firebase to QA team"
+lane :release_uat_firebase do
+# For each variant, there are three builds: 1) BLE without logs 2) BLE with logs 3) Mock without logs
+# BLE release build
+    build_obu_display_app(scheme: "OBUDisplayApp-UAT", export_options: {
+        method: 'ad-hoc',
+        configuration: "ReleaseUAT",
+        provisioningProfiles: {
+            "sg.gov.lta.extol.uat" => "extol uat",
+            "sg.gov.lta.extol.uat.notification" => "extol uat notification"
+        }
+    })
+    distribute_to_firebase(app: nexgen_erp_uat_id)
+
+# increment build number for logs
+increment_build_number(
+    xcodeproj: "OBUDisplayApp/OBUDisplayApp.xcodeproj",
+)
+    # BLE debug build with logs
+    build_obu_display_app(scheme: "OBUDisplayApp-UAT", export_options: {
+        method: 'ad-hoc',
+        configuration: "DebugUAT",
+        provisioningProfiles: {
+            "sg.gov.lta.extol.uat" => "extol uat",
+            "sg.gov.lta.extol.uat.notification" => "extol uat notification"
+
+        }
+    })
+    distribute_to_firebase(app: nexgen_erp_uat_id, release_notes: true)
+    
+        # Mock release build
+    build_obu_display_app(scheme: "OBUDisplayAppMock-UAT", export_options: {
+        method: 'ad-hoc',
+        configuration: "ReleaseMockUAT",
+        provisioningProfiles: {
+                      "sg.gov.lta.extol.mock.uat" => "extol mock uat",
+            "sg.gov.lta.extol.mock.uat.notification" => "extol mock uat notification"
+
+        }
+    })
+    distribute_to_firebase(app: nexgen_erp_mock_uat_id)
+    
+end
+
+private_lane :build_obu_display_app do |options|
+    # create 'build' folder
+    build_folder = "build"
+    sh("mkdir", "-p", "../#{build_folder}/")
+    
+    version = get_obu_display_app_version_build_number()
+    
+    # replace " " with "_"
+    buildName = options[:scheme].gsub(" ", "_")
+    
+    build_app(
+        scheme: options[:scheme],
+        configuration: options[:configuration],
+        include_bitcode: false,
+        clean: true,
+        output_directory: "#{build_folder}",
+        output_name: "#{buildName}_#{version}.ipa",
+        export_options: options[:export_options]
+    )
+    
+end
+
+private_lane :distribute_to_firebase do |options|
+    firebase_app_distribution(
+        app: options[:app],
+        release_notes: (options[:release_notes] ? "This is the app with logs feature enabled" : "./release-notes"),
+        groups: "internal_testers",
+        firebase_cli_path: "/usr/local/bin/firebase"
+    )
+end
+
+private_lane :get_obu_display_app_version_build_number do |options|
+  
+    version = get_version_number(
+        xcodeproj: "OBUDisplayApp/OBUDisplayApp.xcodeproj",
+        target: "OBUDisplayApp"
+    )
+    build = get_build_number(
+        xcodeproj: "OBUDisplayApp/OBUDisplayApp.xcodeproj"
+    )
+    
+    "v#{version}(#{build})"
+end
+
+
