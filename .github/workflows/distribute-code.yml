@@ -13,9 +13,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Remove .gitignore and Gemfile
+      - name: Delete release-notes file
+        run: rm -f release-notes
+
+      - name: Delete build-universal-xcframework-debug file
+        run: rm -f build-universal-xcframework-debug
+
+      - name: Remove .gitignore, gitmodules, and Gemfile
         run: |
-          rm -f .gitignore Gemfile
+          rm -f .gitignore .gitmodules Gemfile
+
+      - name: Remove fastlane and references to fastlane in Xcode project
+        run: |
+          rm -rf fastlane
+          sed -i '' '/fastlane/d' obusdk-ios-sample.xcodeproj/project.pbxproj
 
       - name: Remove unit test folder and reference
         run: |
