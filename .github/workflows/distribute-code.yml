@@ -3,7 +3,7 @@ name: Create and Upload Release Zip
 on:
   push:
     tags:
-      - 'dist/v**'
+      - 'v*'
 
 jobs:
   build:
